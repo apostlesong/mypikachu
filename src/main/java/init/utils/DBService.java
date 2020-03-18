@@ -28,7 +28,9 @@ public class DBService {
 			+ ":3306/pikachuTestDB?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei&allowPublicKeyRetrieval=true";
 
 	public static final String USERID_MySQL = "root";
-	public static final String PSWD_MySQL = "404631060";
+	public static final String PSWD_MySQL = "songsql";
+	
+	private static final String DROP_pair_MySQL = "DROP TABLE IF EXISTS pair;";
 
 	private static final String DROP_members_MySQL = "DROP Table IF EXISTS members ";
 	
@@ -56,7 +58,6 @@ public class DBService {
 	
 	private static final String DROP_responser_MySQL = "DROP TABLE IF EXISTS responser;";
 	
-	private static final String DROP_pair_MySQL = "DROP TABLE IF EXISTS pair;";
 	
 	
 	private static final String CREATE_members_MySQL = " CREATE TABLE members " 
