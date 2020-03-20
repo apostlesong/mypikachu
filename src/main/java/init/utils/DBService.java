@@ -28,7 +28,7 @@ public class DBService {
 			+ ":3306/pikachuTestDB?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Taipei&allowPublicKeyRetrieval=true";
 
 	public static final String USERID_MySQL = "root";
-	public static final String PSWD_MySQL = "Do!ng123";
+	public static final String PSWD_MySQL = "songsql";
 	
 	private static final String DROP_pair_MySQL = "DROP TABLE IF EXISTS pair;";
 

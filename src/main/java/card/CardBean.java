@@ -1,6 +1,7 @@
 package card;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,13 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.mysql.cj.jdbc.Blob;
+
 
 @Entity
 @Table(name = "cards")
 
-public class CardsBean implements Serializable{
-	public CardsBean() {
+public class CardBean implements Serializable{
+	public CardBean() {
 		super();
 	}
 	@Id
