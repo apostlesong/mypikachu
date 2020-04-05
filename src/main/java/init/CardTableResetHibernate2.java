@@ -16,47 +16,17 @@ import member.model.MemberBean;
 
 // 本程式建立CARDS的表格
 
-public class CardTableResetHibernate {
+public class CardTableResetHibernate2 {
 //	public static final String UTF8_BOM = "\uFEFF"; // 定義 UTF-8的BOM字元
 
 	public static void main(String args[]) {
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.openSession();
 		Transaction tx = null;
-		// 1. BookCompany表格
-		// 1-1 由"data/bookCompany.dat"逐筆讀入BookCompany表格內的初始資料，
-		// 然後依序新增到BookCompany表格中
-//		try (
-//			FileReader fr = new FileReader("data/cardcsv.csv"); 
-//			BufferedReader br = new BufferedReader(fr);
-//		) {
-//			while ((line = br.readLine()) != null) {
-//				if (line.startsWith(UTF8_BOM)) {
-//					line = line.substring(1);
-//				}
-//				String[] token = line.split("\\|");
-//				String name = token[0];
-//				String address = token[1];
-//				String url = token[2];
-//				CompanyBean cb = new CompanyBean(null, name, address, url);
-//				try {
-//					tx = session.beginTransaction();
-//					session.save(cb);
-//					tx.commit();
-//				} catch (Exception ex) {
-//					if (tx != null)
-//						tx.rollback();
-//				}
-//			}
-//			System.out.println("BookCompany 資料新增成功");
-//		} catch (IOException e) {
-//			System.err.println("新建BookCompany表格時發生IO例外: " + e.getMessage());
-//		}
-
-		// 2. Book表格
+	
 		String line = "";
 		int count = 0;
-		File file = new File("data/cardcsv1.csv");
+		File file = new File("data/card0405.csv");
 		try (FileInputStream fis = new FileInputStream(file);
 				InputStreamReader isr = new InputStreamReader(fis, "BIG5");
 				BufferedReader br = new BufferedReader(isr);) {
@@ -67,7 +37,7 @@ public class CardTableResetHibernate {
 				}
 				System.out.println("line=" + line);
 
-				String[] token = line.split(",");
+				String[] token = line.split("<");
 
 				CardBean cb = new CardBean();
 //				cb.setC_id();
@@ -79,13 +49,13 @@ public class CardTableResetHibernate {
 				Blob c_img = GlobalService.fileToBlob(imgname);
 				cb.setC_img(c_img);
 
-				if (token[5].indexOf("null") != -1) {
+				if (token[5]== null || token[5].trim().length() == 0) {
 					token[5] = "0";
 				}
 				token[5] = token[5].replace("%", "");
 				cb.setFcb(Double.parseDouble(token[5].trim()));
 
-				if (token[6].indexOf("null") != -1) {
+				if (token[6]== null || token[6].trim().length() == 0) {
 					token[6] = "0";
 				}
 
@@ -98,7 +68,7 @@ public class CardTableResetHibernate {
 				cb.setFma_n(token[11]);
 				cb.setDma_n(token[12]);
 
-				if (token[13].indexOf("null") != -1) {
+				if (token[13]== null || token[13].trim().length() == 0) {
 					token[13] = "0";
 				}
 				cb.setRefuel_cb(Double.parseDouble(token[13].trim()));
@@ -123,7 +93,7 @@ public class CardTableResetHibernate {
 				cb.setMileagefb_n(token[31]);
 				cb.setCashfb_n(token[32]);
 
-				if (token[33].indexOf("null") != -1) {
+				if (token[33]== null || token[33].trim().length() == 0) {
 					token[33] = "0";
 				}
 				cb.setAnnual_income(Integer.parseInt(token[33].trim()));
