@@ -11,7 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import card.CardBean;
+import card.model.CardBean;
 import member.model.MemberBean;
 
 // 本程式建立CARDS的表格

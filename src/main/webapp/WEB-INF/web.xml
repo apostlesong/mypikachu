@@ -29,4 +29,15 @@
     <servlet-name>DisplayProduct</servlet-name>
     <url-pattern>/DisplayProduct</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CbPageCardsServlet</display-name>
+    <servlet-name>CbPageCardsServlet</servlet-name>
+    <servlet-class>card.controller.CbPageCardsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CbPageCardsServlet</servlet-name>
+    <url-pattern>/CbPageCardsServlet</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
