@@ -31,7 +31,7 @@
                  <li class="nav-item"><a class="nav-link" href="#">論壇交友</a></li>
                  <li class="nav-item"><a class="nav-link" href="#">購物商城</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">資訊網</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">信用卡</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.servletContext.contextPath}/cards/cradeitsearch.jsp">信用卡</a></li>
             </ul>
          </div>
        </nav>
@@ -69,26 +69,21 @@
         <!--這裡為信用卡選單區塊-->
        <div class="col-12 creditbtnarea"> 
             <div class="col-8 btnareaone"> <!--信用卡分類連結共14個-->
-                <span id="cradeitsearchpage_number">298</span>項搜尋結果
+                <span id="cradeitsearchpage_number">${cardCounts}</span>項搜尋結果
                    <div class="col-10 dropdown" id="cradeitsearchpage_btnone">
                       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                          <span id="">精選推薦<span>
                       </button>
                         <div class="dropdown-menu" id="cradeitsearchpage_btninn">
-                          <a class="dropdown-item" href="#" id="">全部</a>
-                          <a class="dropdown-item" href="cradeitsearch.html">精選推薦</a>
-                          <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/cards/cradeitCb" id="">現金回饋</a>
-                          <a class="dropdown-item" href="#" id="">限時優惠</a>
-                          <a class="dropdown-item" href="#" id="">加油卡優惠</a>
-                          <a class="dropdown-item" href="#" id="">哩程回饋</a>
-                          <a class="dropdown-item" href="#" id="">分期零利率優惠</a>
-                          <a class="dropdown-item" href="#" id="">電影優惠</a>
-                          <a class="dropdown-item" href="#" id="">信用卡首刷禮</a>
-                          <a class="dropdown-item" href="#" id="">網路購物</a>
-                          <a class="dropdown-item" href="#" id="">亞洲萬里通</a>
-                          <a class="dropdown-item" href="#" id="">繳保費優惠</a>
-                          <a class="dropdown-item" href="#" id="">紅利點數</a>
-                          <a class="dropdown-item" href="#" id="">繳稅優惠</a>
+                        
+                        <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/cards/cradeitCb?qt=all">全部</a>      
+                        <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/cards/cradeitCb?qt=cb">現金回饋</a>
+                        <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/cards/cradeitCb?qt=ml">哩程回饋</a>
+                        <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/cards/cradeitCb?qt=oil">加油卡優惠</a>
+                        <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/cards/cradeitCb?qt=mv">電影優惠</a>
+                        <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/cards/cradeitCb?qt=zi">分期零利率優惠</a>
+                        <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/cards/cradeitCb?qt=os">網路購物</a>
+                        <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/cards/cradeitCb?qt=fg">信用卡首刷禮</a>
                        </div>
                     </div>
                </div>
@@ -358,9 +353,13 @@
           
           <div class="col-8 contentcenter"><!--為中間顯示區塊-->    
           
+          
+          
+          <c:choose> 
+          <c:when test="${qt == 'cb'}">  <!--第1種：現金回饋-->
           <c:forEach varStatus="stVar"  var="entry"  items="${products_DPP}" >
-                <div class="onecard">
-                   <span id="">${entry.value.c_name}</span> <!--這裡為信用卡第2張請以第1張為主-->
+                <div class="onecard"  name="${products_DPP.bank}">
+                   <span id="">${entry.value.c_name}</span> <!--卡名-->
                     <div class="row">
                        <div class="col-2 creditimg"><!--信用卡商品圖-->    
                           <img src="${pageContext.servletContext.contextPath}/RetrieveCardImg?id=${entry.value.c_id}"  width="110px" height="90px">
@@ -385,6 +384,222 @@
                   </div>
                 </div>
                 </c:forEach> 
+                </c:when>
+                
+                
+                <c:when test="${qt == 'ml'}"> <!--第2種：哩程回饋-->
+          		<c:forEach varStatus="stVar"  var="entry"  items="${products_DPP}" >
+                <div class="onecard"  name="${products_DPP.bank}">
+                   <span id="">${entry.value.c_name}</span> <!--卡名-->
+                    <div class="row">
+                       <div class="col-2 creditimg"><!--信用卡商品圖-->    
+                          <img src="${pageContext.servletContext.contextPath}/RetrieveCardImg?id=${entry.value.c_id}"  width="110px" height="90px">
+                      </div>
+                       <div class="col credittext">
+                            <div class="col-4 creditinner"><!--年費-->   
+                               <div><span >${entry.value.annlfee}</span></div>
+                               <div>年費</div>
+                           </div>
+                            <div class="col-4 creditinner"><!--國外消費-->   
+                                <div><span >${entry.value.fma}</span></div>
+                                <div>國外消費累積哩程</div>
+                                <div></div>
+                           </div> 
+                            <div class="col-4 creditinner"><!--國內消費--> 
+                               <div><span >${entry.value.dma}</span></div>
+                               <div>國內消費累積哩程</div>
+                               <div></div>
+                           </div>
+                       </div>   
+                       <div class="col-2 creditbtn"><a href="" class="btn btn-primary" id=>詳細資訊</a></div><!--商品連結頁面--> 
+                  </div>
+                </div>
+                </c:forEach> 
+                </c:when>
+                
+          <c:when test="${qt == 'oil'}">  <!--第3種：加油回饋-->
+          <c:forEach varStatus="stVar"  var="entry"  items="${products_DPP}" >
+                <div class="onecard"  name="${products_DPP.bank}">
+                   <span id="">${entry.value.c_name}</span> <!--卡名-->
+                    <div class="row">
+                       <div class="col-2 creditimg"><!--信用卡商品圖-->    
+                          <img src="${pageContext.servletContext.contextPath}/RetrieveCardImg?id=${entry.value.c_id}"  width="110px" height="90px">
+                      </div>
+                       <div class="col credittext">
+                            <div class="col-4 creditinner"><!--年費-->   
+                               <div><span >${entry.value.annlfee}</span></div>
+                               <div>年費</div>
+                           </div>
+                            <div class="col-4 creditinner"><!--國外消費-->   
+                                <div><span >${entry.value.refuel_cb}</span></div>
+                                <div>加油現金回饋</div>
+                                <div></div>
+                           </div> 
+                            <div class="col-4 creditinner"><!--國內消費--> 
+                               <div><span >${entry.value.refuel_dis}</span></div>
+                               <div>加油優惠</div>
+                               <div></div>
+                           </div>
+                       </div>   
+                       <div class="col-2 creditbtn"><a href="" class="btn btn-primary" id=>詳細資訊</a></div><!--商品連結頁面--> 
+                  </div>
+                </div>
+                </c:forEach> 
+                </c:when>
+                
+          <c:when test="${qt == 'mv'}">  <!--第4種：電影優惠-->
+          <c:forEach varStatus="stVar"  var="entry"  items="${products_DPP}" >
+                <div class="onecard"  name="${products_DPP.bank}">
+                   <span id="">${entry.value.c_name}</span> <!--卡名-->
+                    <div class="row">
+                       <div class="col-2 creditimg"><!--信用卡商品圖-->    
+                          <img src="${pageContext.servletContext.contextPath}/RetrieveCardImg?id=${entry.value.c_id}"  width="110px" height="90px">
+                      </div>
+                       <div class="col credittext">
+                            <div class="col-4 creditinner"><!--年費-->   
+                               <div><span >${entry.value.annlfee}</span></div>
+                               <div>年費</div>
+                           </div>
+                            <div class="col-4 creditinner"><!--國外消費-->   
+                                <div><span >${entry.value.wkdmoviedis}</span></div>
+                                <div>週未電影折扣</div>
+                                <div></div>
+                           </div> 
+                            <div class="col-4 creditinner"><!--國內消費--> 
+                               <div><span >${entry.value.moviedis}</span></div>
+                               <div>平日電影折扣</div>
+                               <div></div>
+                           </div>
+                       </div>   
+                       <div class="col-2 creditbtn"><a href="" class="btn btn-primary" id=>詳細資訊</a></div><!--商品連結頁面--> 
+                  </div>
+                </div>
+                </c:forEach> 
+                </c:when>                                
+
+          <c:when test="${qt == 'os'}">  <!--第5種：網購回饋-->
+          <c:forEach varStatus="stVar"  var="entry"  items="${products_DPP}" >
+                <div class="onecard"  name="${products_DPP.bank}">
+                   <span id="">${entry.value.c_name}</span> <!--卡名-->
+                    <div class="row">
+                       <div class="col-2 creditimg"><!--信用卡商品圖-->    
+                          <img src="${pageContext.servletContext.contextPath}/RetrieveCardImg?id=${entry.value.c_id}"  width="110px" height="90px">
+                      </div>
+                       <div class="col credittext">
+                            <div class="col-4 creditinner"><!--年費-->   
+                               <div><span >${entry.value.ditigalfb}</span></div>
+                               <div>數位通路回饋上限</div>
+                           </div>
+                            <div class="col-4 creditinner"><!--國外消費-->   
+                                <div><span >${entry.value.fcb}</span></div>
+                                <div>國外消費現金回饋</div>
+                                <div></div>
+                           </div> 
+                            <div class="col-4 creditinner"><!--國內消費--> 
+                               <div><span >${entry.value.onlinefb}</span></div>
+                               <div>網購回饋</div>
+                               <div></div>
+                           </div>
+                       </div>   
+                       <div class="col-2 creditbtn"><a href="" class="btn btn-primary" id=>詳細資訊</a></div><!--商品連結頁面--> 
+                  </div>
+                </div>
+                </c:forEach> 
+                </c:when>                
+
+          <c:when test="${qt == 'zi'}">  <!--第6種：分期零利率-->
+          <c:forEach varStatus="stVar"  var="entry"  items="${products_DPP}" >
+                <div class="onecard"  name="${products_DPP.bank}">
+                   <span id="">${entry.value.c_name}</span> <!--卡名-->
+                    <div class="row">
+                       <div class="col-2 creditimg"><!--信用卡商品圖-->    
+                          <img src="${pageContext.servletContext.contextPath}/RetrieveCardImg?id=${entry.value.c_id}"  width="110px" height="90px">
+                      </div>
+                       <div class="col credittext">
+                            <div class="col-4 creditinner"><!--年費-->   
+                               <div><span >${entry.value.annlfee}</span></div>
+                               <div>年費</div>
+                           </div>
+                            <div class="col-4 creditinner"><!--國外消費-->   
+                                <div><span >${entry.value.zeroins}</span></div>
+                                <div>最高分期數</div>
+                                <div></div>
+                           </div> 
+                            <div class="col-4 creditinner"><!--國內消費--> 
+                               <div><span >${entry.value.minins}</span></div>
+                               <div>最底可分期金額</div>
+                               <div></div>
+                           </div>
+                       </div>   
+                       <div class="col-2 creditbtn"><a href="" class="btn btn-primary" id=>詳細資訊</a></div><!--商品連結頁面--> 
+                  </div>
+                </div>
+                </c:forEach> 
+                </c:when>                
+
+          <c:when test="${qt == 'fg'}">  <!--第7種：首刷-->
+          <c:forEach varStatus="stVar"  var="entry"  items="${products_DPP}" >
+                <div class="onecard"  name="${products_DPP.bank}">
+                   <span id="">${entry.value.c_name}</span> <!--卡名-->
+                    <div class="row">
+                       <div class="col-2 creditimg"><!--信用卡商品圖-->    
+                          <img src="${pageContext.servletContext.contextPath}/RetrieveCardImg?id=${entry.value.c_id}"  width="110px" height="90px">
+                      </div>
+                       <div class="col credittext">
+                            <div class="col-4 creditinner"><!--年費-->   
+                               <div><span >${entry.value.annlfee}</span></div>
+                               <div>年費</div>
+                           </div>
+                            <div class="col-4 creditinner"><!--國外消費-->   
+                                <div><span >${entry.value.mileagefb}</span></div>
+                                <div>首刷哩程回饋</div>
+                                <div></div>
+                           </div> 
+                            <div class="col-4 creditinner"><!--國內消費--> 
+                               <div><span >${entry.value.cashfb}</span></div>
+                               <div>首刷(類)現金回饋</div>
+                               <div></div>
+                           </div>
+                       </div>   
+                       <div class="col-2 creditbtn"><a href="" class="btn btn-primary" id=>詳細資訊</a></div><!--商品連結頁面--> 
+                  </div>
+                </div>
+                </c:forEach> 
+                </c:when>                
+
+          <c:when test="${qt == 'all'}">  <!--第8種：全部-->
+          <c:forEach varStatus="stVar"  var="entry"  items="${products_DPP}" >
+                <div class="onecard"  name="${products_DPP.bank}">
+                   <span id="">${entry.value.c_name}</span> <!--卡名-->
+                    <div class="row">
+                       <div class="col-2 creditimg"><!--信用卡商品圖-->    
+                          <img src="${pageContext.servletContext.contextPath}/RetrieveCardImg?id=${entry.value.c_id}"  width="110px" height="90px">
+                      </div>
+                       <div class="col credittext">
+                            <div class="col-4 creditinner"><!--年費-->   
+                               <div><span >${entry.value.annlfee}</span></div>
+                               <div>年費</div>
+                           </div>
+                            <div class="col-4 creditinner"><!--國外消費-->   
+                                <div><span >${entry.value.fcb}</span></div>
+                                <div>國外消費現金回饋</div>
+                                <div></div>
+                           </div> 
+                            <div class="col-4 creditinner"><!--國內消費--> 
+                               <div><span >${entry.value.dcb}</span></div>
+                               <div>國內消費現金回饋</div>
+                               <div></div>
+                           </div>
+                       </div>   
+                       <div class="col-2 creditbtn"><a href="" class="btn btn-primary" id=>詳細資訊</a></div><!--商品連結頁面--> 
+                  </div>
+                </div>
+                </c:forEach> 
+                </c:when>                
+                
+                
+                </c:choose>
+                
         </div>
         
      </div>
@@ -402,43 +617,6 @@
 <!--              <span aria-hidden="true">&raquo;</span></a> -->
 <!--       </ul> -->
 <!--     </div> -->
-
-<table border="1">
-  <tr>
-    <td width='76'>
-        <c:if test="${pageNo > 1}">
-           <div id="pfirst">
-              <a href="<c:url value='DisplayPageProducts?pageNo=1' />">第一頁</a>
-           </div>
-        </c:if>
-     </td>
-     <td width='76'>
-        <c:if test="${pageNo > 1}">
-           <div id="pprev">
-              <a href="<c:url value='DisplayPageProducts?pageNo=${pageNo-1}' />">上一頁</a>
-           </div>
-        </c:if>  
-     </td>
-     <td width='76'>
-            <c:if test="${pageNo != totalPages}">
-                <div id="pnext">
-                   <a href="<c:url value='DisplayPageProducts?pageNo=${pageNo+1}' />">下一頁</a>
-                </div>
-            </c:if>
-     </td>  
-     <td width='76'>
-            <c:if test="${pageNo != totalPages}">
-                <div id="plast">
-                    <a href="<c:url value='DisplayPageProducts?pageNo=${totalPages}' />">最末頁</a>
-                </div>
-            </c:if>
-     </td>
-     <td width='176' align="center">
-                      第${pageNo}頁 / 共${totalPages}頁
-     </td>  
-</tr>
-</table>
-
 
 
       

@@ -23,13 +23,13 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getCbPageCards(int pageNo) {
+	public Map<Integer, CardBean> getCbPageCards() {
 		Map<Integer, CardBean> map = null;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			map = dao.getCbPageCards(pageNo);
+			map = dao.getCbPageCards();
 			tx.commit();
 		} catch (Exception ex) {
 			if (tx != null)
@@ -41,13 +41,13 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getMlPageCards(int pageNo) {
+	public Map<Integer, CardBean> getMlPageCards() {
 		Map<Integer, CardBean> map = null;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			map = dao.getMlPageCards(pageNo);
+			map = dao.getMlPageCards();
 			tx.commit();
 		} catch (Exception ex) {
 			if (tx != null)
@@ -59,13 +59,13 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getOilPageCards(int pageNo) {
+	public Map<Integer, CardBean> getOilPageCards() {
 		Map<Integer, CardBean> map = null;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			map = dao.getOilPageCards(pageNo);
+			map = dao.getOilPageCards();
 			tx.commit();
 		} catch (Exception ex) {
 			if (tx != null)
@@ -77,13 +77,13 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getMvPageCards(int pageNo) {
+	public Map<Integer, CardBean> getMvPageCards() {
 		Map<Integer, CardBean> map = null;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			map = dao.getMvPageCards(pageNo);
+			map = dao.getMvPageCards();
 			tx.commit();
 		} catch (Exception ex) {
 			if (tx != null)
@@ -95,13 +95,13 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getOsPageCards(int pageNo) {
+	public Map<Integer, CardBean> getOsPageCards() {
 		Map<Integer, CardBean> map = null;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			map = dao.getOsPageCards(pageNo);
+			map = dao.getOsPageCards();
 			tx.commit();
 		} catch (Exception ex) {
 			if (tx != null)
@@ -113,13 +113,13 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getZiPageCards(int pageNo) {
+	public Map<Integer, CardBean> getZiPageCards() {
 		Map<Integer, CardBean> map = null;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			map = dao.getZiPageCards(pageNo);
+			map = dao.getZiPageCards();
 			tx.commit();
 		} catch (Exception ex) {
 			if (tx != null)
@@ -131,13 +131,13 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getFgPageCards(int pageNo) {
+	public Map<Integer, CardBean> getFgPageCards() {
 		Map<Integer, CardBean> map = null;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			map = dao.getFgPageCards(pageNo);
+			map = dao.getFgPageCards();
 			tx.commit();
 		} catch (Exception ex) {
 			if (tx != null)
@@ -146,6 +146,26 @@ public class CardServiceImpl implements CardService {
 			throw new RuntimeException(ex);
 		}
 		return map;
+	}
+	
+	
+	@Override
+	public Map<Integer, CardBean> getAllCards(){
+		Map<Integer, CardBean> map = null;
+		Session session = factory.getCurrentSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			map = dao.getAllCards();
+			tx.commit();
+		} catch (Exception ex) {
+			if (tx != null)
+				tx.rollback();
+			ex.printStackTrace();
+			throw new RuntimeException(ex);
+		}
+		return map;
+		
 	}
 
 	@Override

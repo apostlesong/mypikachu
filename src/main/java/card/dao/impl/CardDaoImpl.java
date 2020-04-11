@@ -25,19 +25,18 @@ public class CardDaoImpl implements Serializable, CardDao {
 	}
 	
 	@Override
-	public Map<Integer, CardBean> getCbPageCards(int pageNo) {
+	public Map<Integer, CardBean> getCbPageCards() {
         Map<Integer, CardBean> map = new HashMap<>();
 		
 		List<CardBean> list = new ArrayList<CardBean>();
 		String hql = "FROM CardBean c WHERE c.fcb > 0 AND c.dcb >0";
-//		String hql = "FROM CardBean";
         Session session = factory.getCurrentSession();
 
-        int startRecordNo = (pageNo - 1) * recordsPerPage;
+//        int startRecordNo = (pageNo - 1) * recordsPerPage;
 
         list = session.createQuery(hql)
-                      .setFirstResult(startRecordNo)
-                      .setMaxResults(recordsPerPage)
+//                      .setFirstResult(startRecordNo)
+//                      .setMaxResults(recordsPerPage)
                       .getResultList();
         for(CardBean bean : list) {
         	map.put(bean.getC_id(), bean);
@@ -46,18 +45,18 @@ public class CardDaoImpl implements Serializable, CardDao {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getMlPageCards(int pageNo) {
+	public Map<Integer, CardBean> getMlPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
 			
 			List<CardBean> list = new ArrayList<CardBean>();
 			String hql = "FROM CardBean c WHERE c.fma LIKE 'NT%' OR c.dma LIKE 'NT%'";
 	        Session session = factory.getCurrentSession();
 
-	        int startRecordNo = (pageNo - 1) * recordsPerPage;
+//	        int startRecordNo = (pageNo - 1) * recordsPerPage;
 
 	        list = session.createQuery(hql)
-	                      .setFirstResult(startRecordNo)
-	                      .setMaxResults(recordsPerPage)
+//	                      .setFirstResult(startRecordNo)
+//	                      .setMaxResults(recordsPerPage)
 	                      .getResultList();
 	        for(CardBean bean : list) {
 	        	map.put(bean.getC_id(), bean);
@@ -66,18 +65,18 @@ public class CardDaoImpl implements Serializable, CardDao {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getOilPageCards(int pageNo) {
+	public Map<Integer, CardBean> getOilPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
 			
 			List<CardBean> list = new ArrayList<CardBean>();
-			String hql = "FROM CardBean c WHERE c.refuel_dis LIKE 'NT%' OR refuel_cb > 0.0001;";
+			String hql = "FROM CardBean c WHERE c.refuel_dis LIKE 'NT%' OR refuel_cb > 0.0001";
 	        Session session = factory.getCurrentSession();
 
-	        int startRecordNo = (pageNo - 1) * recordsPerPage;
+//	        int startRecordNo = (pageNo - 1) * recordsPerPage;
 
 	        list = session.createQuery(hql)
-	                      .setFirstResult(startRecordNo)
-	                      .setMaxResults(recordsPerPage)
+//	                      .setFirstResult(startRecordNo)
+//	                      .setMaxResults(recordsPerPage)
 	                      .getResultList();
 	        for(CardBean bean : list) {
 	        	map.put(bean.getC_id(), bean);
@@ -86,18 +85,18 @@ public class CardDaoImpl implements Serializable, CardDao {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getMvPageCards(int pageNo) {
+	public Map<Integer, CardBean> getMvPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
 			
 			List<CardBean> list = new ArrayList<CardBean>();
 			String hql = "FROM CardBean c WHERE wkdmoviedis LIKE '%折' OR moviedis LIKE '%折'";
 	        Session session = factory.getCurrentSession();
 
-	        int startRecordNo = (pageNo - 1) * recordsPerPage;
+//	        int startRecordNo = (pageNo - 1) * recordsPerPage;
 
 	        list = session.createQuery(hql)
-	                      .setFirstResult(startRecordNo)
-	                      .setMaxResults(recordsPerPage)
+//	                      .setFirstResult(startRecordNo)
+//	                      .setMaxResults(recordsPerPage)
 	                      .getResultList();
 	        for(CardBean bean : list) {
 	        	map.put(bean.getC_id(), bean);
@@ -106,18 +105,18 @@ public class CardDaoImpl implements Serializable, CardDao {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getOsPageCards(int pageNo) {
+	public Map<Integer, CardBean> getOsPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
 			
 			List<CardBean> list = new ArrayList<CardBean>();
 			String hql = "FROM CardBean c WHERE c.onlinefb >0.001";
 	        Session session = factory.getCurrentSession();
 
-	        int startRecordNo = (pageNo - 1) * recordsPerPage;
+//	        int startRecordNo = (pageNo - 1) * recordsPerPage;
 
 	        list = session.createQuery(hql)
-	                      .setFirstResult(startRecordNo)
-	                      .setMaxResults(recordsPerPage)
+//	                      .setFirstResult(startRecordNo)
+//	                      .setMaxResults(recordsPerPage)
 	                      .getResultList();
 	        for(CardBean bean : list) {
 	        	map.put(bean.getC_id(), bean);
@@ -126,18 +125,38 @@ public class CardDaoImpl implements Serializable, CardDao {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getZiPageCards(int pageNo) {
+	public Map<Integer, CardBean> getZiPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
 			
 			List<CardBean> list = new ArrayList<CardBean>();
 			String hql = "FROM CardBean c WHERE c.zeroins LIKE '%期'";
 	        Session session = factory.getCurrentSession();
 
-	        int startRecordNo = (pageNo - 1) * recordsPerPage;
+//	        int startRecordNo = (pageNo - 1) * recordsPerPage;
 
 	        list = session.createQuery(hql)
-	                      .setFirstResult(startRecordNo)
-	                      .setMaxResults(recordsPerPage)
+//	                      .setFirstResult(startRecordNo)
+//	                      .setMaxResults(recordsPerPage)
+	                      .getResultList();
+	        for(CardBean bean : list) {
+	        	map.put(bean.getC_id(), bean);
+	        }
+			return map;
+	}
+	
+	
+	@Override
+	public Map<Integer, CardBean> getAllCards() {
+		  Map<Integer, CardBean> map = new HashMap<>();
+			
+			List<CardBean> list = new ArrayList<CardBean>();
+			String hql = "FROM CardBean";
+	        Session session = factory.getCurrentSession();
+
+	       
+
+	        list = session.createQuery(hql)
+	                 
 	                      .getResultList();
 	        for(CardBean bean : list) {
 	        	map.put(bean.getC_id(), bean);
@@ -146,18 +165,18 @@ public class CardDaoImpl implements Serializable, CardDao {
 	}
 
 	@Override
-	public Map<Integer, CardBean> getFgPageCards(int pageNo) {
+	public Map<Integer, CardBean> getFgPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
 			
 			List<CardBean> list = new ArrayList<CardBean>();
-			String hql = "SELECT * FROM CardBean c WHERE c.cashfb LIKE '%0' OR mileagefb LIKE '%里'";
+			String hql = "FROM CardBean c WHERE c.cashfb LIKE '%0' OR mileagefb LIKE '%里'";
 	        Session session = factory.getCurrentSession();
 
-	        int startRecordNo = (pageNo - 1) * recordsPerPage;
+//	        int startRecordNo = (pageNo - 1) * recordsPerPage;
 
 	        list = session.createQuery(hql)
-	                      .setFirstResult(startRecordNo)
-	                      .setMaxResults(recordsPerPage)
+//	                      .setFirstResult(startRecordNo)
+//	                      .setMaxResults(recordsPerPage)
 	                      .getResultList();
 	        for(CardBean bean : list) {
 	        	map.put(bean.getC_id(), bean);

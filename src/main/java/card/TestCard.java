@@ -13,13 +13,13 @@ public class TestCard {
 		int recordsPerPage = 8;
 		
 		CardService service = new CardServiceImpl();
-		Map<Integer, CardBean> CardMap = service.getCbPageCards(pageNo);
+		Map<Integer, CardBean> CardMap = service.getCbPageCards();
 		
 	
 		
 		int cardCounts = CardMap.size();
 		int totalPages = (int)(Math.ceil( cardCounts / (double)recordsPerPage));
-		System.out.println("每該頁筆數:" + cardCounts);
+		System.out.println("總筆數:" + cardCounts);
 		System.out.println("總頁數:" + totalPages);
 	}
 

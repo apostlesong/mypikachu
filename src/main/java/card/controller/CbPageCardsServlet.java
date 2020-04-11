@@ -20,7 +20,7 @@ import card.service.impl.CardServiceImpl;
 public class CbPageCardsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	int pageNo = 1;
+	String queryType = "cb";
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,8 +29,8 @@ public class CbPageCardsServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-				String pageNoStr = request.getParameter("pageNo");
-		
+				String queryType = request.getParameter("qt");
+				
 //		HttpSession session = request.getSession(false);
 //		
 //		if (pageNoStr == null) {  
@@ -55,15 +55,50 @@ public class CbPageCardsServlet extends HttpServlet {
 //				pageNo = 1;
 //			}
 //		}
-	    int recordsPerPage = 8;
+	  
 		CardService service = new CardServiceImpl();
-		Map<Integer, CardBean> CardMap = service.getCbPageCards(pageNo);
-		int cardCounts = CardMap.size();
 		
-		int totalPages = (int)(Math.ceil( cardCounts / (double)recordsPerPage));
+		Map<Integer, CardBean> CardMap;
+		switch(queryType){
 
-		session.setAttribute("pageNo", String.valueOf(pageNo));
-		request.setAttribute("totalPages", totalPages);
+		case "cb":
+		CardMap = service.getCbPageCards();
+		break;
+
+		case "ml":
+		CardMap = service.getMlPageCards();
+		break;
+
+		case "oil":
+		CardMap = service.getOilPageCards();
+		break;
+		
+		case "mv":
+		CardMap = service.getMvPageCards();
+		break;
+		
+		case "os":
+		CardMap = service.getOsPageCards();
+		break;
+		
+		case "zi":
+		CardMap = service.getZiPageCards();
+		break;
+		
+		case "fg":
+		CardMap = service.getFgPageCards();
+		break;
+		
+		case "all":
+		CardMap = service.getAllCards();
+		break;
+
+		default:
+		CardMap = service.getCbPageCards();
+		}
+		int cardCounts = CardMap.size();
+		request.setAttribute("cardCounts", cardCounts);
+		session.setAttribute("qt", queryType);	
 		session.setAttribute("products_DPP", CardMap);
 		
 //		// 使用Cookie來儲存目前讀取的網頁編號，Cookie的名稱為memberId + "pageNo"
