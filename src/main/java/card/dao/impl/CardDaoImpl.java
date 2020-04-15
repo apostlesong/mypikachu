@@ -15,8 +15,10 @@ import init.HibernateUtils;
 
 public class CardDaoImpl implements Serializable, CardDao {
 
-	private int recordsPerPage = 8;
-	private int totalPages = -1;
+
+	private static final long serialVersionUID = 1L;
+//	private int recordsPerPage = 8;
+//	private int totalPages = -1;
 
     SessionFactory factory;
     
@@ -24,6 +26,7 @@ public class CardDaoImpl implements Serializable, CardDao {
         factory = HibernateUtils.getSessionFactory();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<Integer, CardBean> getCbPageCards() {
         Map<Integer, CardBean> map = new HashMap<>();
@@ -44,6 +47,7 @@ public class CardDaoImpl implements Serializable, CardDao {
 		return map;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<Integer, CardBean> getMlPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
@@ -64,6 +68,7 @@ public class CardDaoImpl implements Serializable, CardDao {
 			return map;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<Integer, CardBean> getOilPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
@@ -84,6 +89,7 @@ public class CardDaoImpl implements Serializable, CardDao {
 			return map;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<Integer, CardBean> getMvPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
@@ -104,6 +110,7 @@ public class CardDaoImpl implements Serializable, CardDao {
 			return map;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<Integer, CardBean> getOsPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
@@ -124,6 +131,7 @@ public class CardDaoImpl implements Serializable, CardDao {
 			return map;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<Integer, CardBean> getZiPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
@@ -145,6 +153,7 @@ public class CardDaoImpl implements Serializable, CardDao {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<Integer, CardBean> getAllCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();
@@ -164,6 +173,7 @@ public class CardDaoImpl implements Serializable, CardDao {
 			return map;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<Integer, CardBean> getFgPageCards() {
 		  Map<Integer, CardBean> map = new HashMap<>();

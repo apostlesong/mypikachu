@@ -26,7 +26,7 @@ public class CardTableResetHibernate2 {
 	
 		String line = "";
 		int count = 0;
-		File file = new File("data/card0405.csv");
+		File file = new File("data/card0414.csv");
 		try (FileInputStream fis = new FileInputStream(file);
 				InputStreamReader isr = new InputStreamReader(fis, "BIG5");
 				BufferedReader br = new BufferedReader(isr);) {

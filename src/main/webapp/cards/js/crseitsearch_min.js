@@ -32,10 +32,11 @@
       if (stepIdx === endStepIdx) {
         // 將下一步改爲『完成』
         $('#nextBtn').html('完成');
-      } else {
-        // 將下一步改爲『下一題』
-        $('#nextBtn').html('下一題');
-      }
+      } 
+      // else {
+      //   // 將下一步改爲『下一題』
+      //   $('#nextBtn').html('下一題');
+      // }
     }
 
     function switchTo(stepIdx) {
@@ -58,29 +59,64 @@
     }
 
     function btnEventHandler() {
-      //  點擊下一個按鈕
+
+      
+  
       $('#nextBtn').on('click', function () {
+
+
+        birthday=  document.getElementById('bday').value;
+        let d =new Date();
+        let bdtime = new Date(birthday);
+        //算出年齡     現在年             出生年            (如果現在月份小於出生月份       或     同一個月，現在 日期 小於出生日) 若為真再-1，若否則-0  
+        let age = d.getFullYear()-bdtime.getFullYear()-((d.getMonth()<bdtime.getMonth()|| d.getMonth()==bdtime.getMonth() && d.getDate()<bdtime.getDate())?1:0);
+          
+          if(age<20){
+            alert("必需滿20歲才能申請信用卡，請輸入合法年齡 或 離開問卷")
+            return(false);
+          }
+ 
         currentStepIdx++;
         switchTo(currentStepIdx);
+        // alert(currentStepIdx);
       });
 
       //  點擊上一個按鈕
       $('#prevBtn').on('click', function () {
-        // 步驟 - 1
+
+        birthday=  document.getElementById('bday').value;
+        let d =new Date();
+        let bdtime = new Date(birthday);
+  
+        let age = d.getFullYear()-bdtime.getFullYear()-((d.getMonth()<bdtime.getMonth()|| d.getMonth()==bdtime.getMonth() && d.getDate()<bdtime.getDate())?1:0);
+          
+          if(age<20){
+            alert("必需滿20歲才能申請信用卡，請輸入合法年齡 或 離開問卷")
+            return(false);
+          }
+ 	
         currentStepIdx--;
         switchTo(currentStepIdx);
+        // alert(currentStepIdx);
       });
     }
-
+    
     // --------------------------------------------------------
     // 執行區
     // --------------------------------------------------------
     // 當點擊按鈕時執行 ...
     var startbtn=document.getElementById('cradeitsearchmine_btn');
     startbtn.addEventListener("click",function(){
-      btnEventHandler();
-      $('#cradeitsearchmine_myModal').modal('show'); 
-    },false) 
+     
+      $('#cradeitsearchmine_myModal').modal('show');
+    },false,)
+    var birthday=  document.getElementById('bday');
+    birthday.setAttribute("value","1980-01-01"); 
 
+    btnEventHandler(); 
+    
+  
+    
+    
     // 預設是第一步，所以先隱藏上一步的按鈕
     $('#prevBtn').css({ display: 'none' });
