@@ -91,7 +91,7 @@
         let age = d.getFullYear()-bdtime.getFullYear()-((d.getMonth()<bdtime.getMonth()|| d.getMonth()==bdtime.getMonth() && d.getDate()<bdtime.getDate())?1:0);
           
           if(age<20){
-            alert("必需滿20歲才能申請信用卡，請輸入合法年齡 或 離開問卷")
+            alert("必需滿20歲才能申請信用卡，請重新輸入生日 或 離開問卷")
             return(false);
           }
  	
@@ -110,13 +110,38 @@
      
       $('#cradeitsearchmine_myModal').modal('show');
     },false,)
+
+    
     var birthday=  document.getElementById('bday');
     birthday.setAttribute("value","1980-01-01"); 
 
     btnEventHandler(); 
     
-  
-    
-    
     // 預設是第一步，所以先隱藏上一步的按鈕
     $('#prevBtn').css({ display: 'none' });
+
+
+
+    var seop = document.getElementsByClassName('se'); 
+    for(var i=0;i<seop.length;i++ ){
+        seop[i].addEventListener('click',changelist);
+        }
+    
+    function changelist(){
+
+      let checkarray = [];
+      for(j=0;j<seop.length;j++){
+          checkarray.push(seop[j].value);
+      }
+      
+      let optag = document.getElementsByName('option');
+         
+      for(x=0;x<optag.length;x++){
+      
+        if(checkarray.indexOf(optag[x].value) != -1){
+                  optag[x].style.display = 'none';
+        }else{
+                  optag[x].style.display = 'block';
+              }
+      }
+    }
